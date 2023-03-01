@@ -16,10 +16,8 @@
         <dialog open>
         <p>You are pressing alert!</p>
         <input type="button" id="closealert" value="close">
-        <script>      
-            function alertClose(){
-                document.body.removeChild(document.getElementById("alertwindow"));
-            }
+        <script type="module">    
+            import {alertClose} from "./customdialog.js";
             document.getElementById("closealert").addEventListener('click', alertClose);
         </script>
         <dialog>
@@ -31,18 +29,8 @@
             <input type="button" id="okayconfirm" value="ok">
             <input type="button" id="closeconfirm" value="close">
 
-            <script>
-
-                function okclick(){
-                    document.getElementById("output").innerHTML = "The value returned by the confirm method is : true"
-                    document.body.removeChild(document.getElementById("confirmwindow"));
-                }
-
-                function closeclick(){
-                    document.getElementById("output").innerHTML = "The value returned by the confirm method is : false"
-                    document.body.removeChild(document.getElementById("confirmwindow"));
-                }
-
+            <script type="module">
+                import {okclick, closeclick} from "./customdialog.js"
                 document.getElementById("okayconfirm").addEventListener('click', okclick);
                 document.getElementById("closeconfirm").addEventListener('click', closeclick);
             </script>
