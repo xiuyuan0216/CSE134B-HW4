@@ -46,70 +46,28 @@
             <input type="button" id="submit" value="submit">
         </dialog>
 
-        <script>
-            function cancelClick(){
-                document.getElementById("output").innerHTML = "User didn't enter anything";
-                document.body.removeChild(document.getElementById("promptwindow"));
-            }
-
-            function submitClick(){
-                let cleanResult = DOMPurify.sanitize(document.getElementById("prompttext").value);
-                if(cleanResult == null || cleanResult == ""){
-                    document.getElementById("output").innerHTML = "User didn't enter anything";
-                }else{
-                    document.getElementById("output").innerHTML = cleanResult;
-                }
-                document.body.removeChild(document.getElementById("promptwindow"));
-            }
+        <script type="module">
+            import {cancelClick, submitClick} from "./customdialog.js"
 
             document.getElementById("cancel").addEventListener("click", cancelClick);
             document.getElementById("submit").addEventListener("click", submitClick);
         </script>
     </template>
 
-    <script>
-        function alertClick(){
-            if(!document.body.contains(document.getElementById("alertwindow"))){
-                let elem = document.createElement('div');
-                elem.setAttribute('id', "alertwindow")
-                let alertmsg = document.getElementById("alertmsg");
-                let clon = alertmsg.content.cloneNode(true);
-                elem.appendChild(clon);
-                document.body.appendChild(elem);
-            }
-        }
+    <script type="module">
+        import {alertClick} from "./customdialog.js"
         let al = document.getElementById("alert");
         al.addEventListener('click', alertClick);
     </script>
 
-    <script>
-        function confirmClick(){
-            if(!document.body.contains(document.getElementById("confirmwindow"))){
-                let elem = document.createElement("div");
-                elem.setAttribute('id', 'confirmwindow');
-                let confirmmsg = document.getElementById("confirmmsg");
-                let clon = confirmmsg.content.cloneNode(true);
-                elem.appendChild(clon);
-                document.body.appendChild(elem);
-            }
-        }
-
+    <script type="module">
+        import {confirmClick} from "./customdialog.js"
         let co = document.getElementById("confirm");
         co.addEventListener('click', confirmClick);
     </script>
 
-    <script>
-
-        function promptClick(){
-            if(!document.body.contains(document.getElementById("promptwindow"))){
-                let elem = document.createElement("div");
-                elem.setAttribute("id", 'promptwindow');
-                let promptmsg = document.getElementById("promptmsg");
-                let clon = promptmsg.content.cloneNode(true);
-                elem.appendChild(clon);
-                document.body.appendChild(elem);
-            }
-        }
+    <script type="module">
+        import {promptClick} from "./customdialog.js"
         let pr = document.getElementById("prompt");
         pr.addEventListener('click', promptClick);
     </script>
