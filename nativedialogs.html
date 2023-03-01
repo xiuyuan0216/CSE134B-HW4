@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nativedialogs</title>
+    <script src="./node_modules/dompurify/dist/purify.js"></script>
+</head>
+<body>
+
+    <input type="button" id="alert" name="alert" value="alert">
+
+    <script>
+
+        function alertClick(){
+            alert("You press Alert button!")
+        }
+        let al = document.getElementById("alert");
+        al.addEventListener('click', alertClick);
+
+    </script>
+
+    <input type="button" id="confirm" name="confirm" value="confirm">
+
+    <script>
+        function confirmClick(){
+            let output = document.getElementById("output");
+            let result = confirm("Are you sure that you confirm this?");
+            output.innerHTML = "The value returned by the confirm method is : "+result;
+        }
+
+        let co = document.getElementById("confirm");
+        co.addEventListener('click', confirmClick);
+        
+    </script>
+
+    <input type="button" id="prompt" name="prompt" value="prompt">
+
+    <script>
+        function promptClick(){
+            let result = prompt("What do you want to input?");
+            let output = document.getElementById("output");
+            output.innerHTML = (result == null || result=="") ? "User didn't enter anything":result;
+        }
+
+        let pr = document.getElementById("prompt");
+        pr.addEventListener('click', promptClick);
+    </script>
+
+    <input type="button" id="safeprompt" name="safeprompt" value="safe prompt">
+
+    <script>
+        function safepromptClick(){
+            let result = prompt("What do you want to input?");
+            let safeOutput = document.getElementById("output");
+            let cleanResult = DOMPurify.sanitize(result);
+            if(cleanResult==null||cleanResult==""){
+                safeOutput.innerHTML = "User didn't enter anything";
+            }else{
+                safeOutput.innerHTML = cleanResult;
+            }
+        }
+
+        let sa = document.getElementById("safeprompt");
+        sa.addEventListener("click", safepromptClick);
+    </script>
+
+    <p><output id="output"></output></p>
+    
+</body>
+</html>

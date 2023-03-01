@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CustumDialogs</title>
+
+    <script src="./node_modules/dompurify/dist/purify.js"></script>
+
+</head>
+<body>
+    <input type="button" id="alert" name="alert" value="alert">
+    <input type="button" id="confirm" name="confirm" value="confirm">
+    <input type="button" id="prompt" name="prompt" value="prompt">
+    
+    <template id="alertmsg">
+        <dialog open>
+        <p>You are pressing alert!</p>
+        <input type="button" id="closealert" value="close">
+        <script>      
+            function alertClose(){
+                document.body.removeChild(document.getElementById("alertwindow"));
+            }
+            document.getElementById("closealert").addEventListener('click', alertClose);
+        </script>
+        <dialog>
+    </template>
+
+    <template id="confirmmsg">
+        <dialog open>
+            <p>Do you confirm this?</p>
+            <input type="button" id="okayconfirm" value="ok">
+            <input type="button" id="closeconfirm" value="close">
+
+            <script>
+
+                function okclick(){
+                    document.getElementById("output").innerHTML = "The value returned by the confirm method is : true"
+                    document.body.removeChild(document.getElementById("confirmwindow"));
+                }
+
+                function closeclick(){
+                    document.getElementById("output").innerHTML = "The value returned by the confirm method is : false"
+                    document.body.removeChild(document.getElementById("confirmwindow"));
+                }
+
+                document.getElementById("okayconfirm").addEventListener('click', okclick);
+                document.getElementById("closeconfirm").addEventListener('click', closeclick);
+            </script>
+        </dialog>
+
+    </template>
+
+    <template id="promptmsg">
+        <dialog open>
+            <p>Type your comments here!</p>
+            <input type="text" id="prompttext">
+            <input type="button" id="cancel" value="cancel">
+            <input type="button" id="submit" value="submit">
+        </dialog>
+
+        <script>
+            function cancelClick(){
+                document.getElementById("output").innerHTML = "User didn't enter anything";
+                document.body.removeChild(document.getElementById("promptwindow"));
+            }
+
+            function submitClick(){
+                let cleanResult = DOMPurify.sanitize(document.getElementById("prompttext").value);
+                if(cleanResult == null || cleanResult == ""){
+                    document.getElementById("output").innerHTML = "User didn't enter anything";
+                }else{
+                    document.getElementById("output").innerHTML = cleanResult;
+                }
+                document.body.removeChild(document.getElementById("promptwindow"));
+            }
+
+            document.getElementById("cancel").addEventListener("click", cancelClick);
+            document.getElementById("submit").addEventListener("click", submitClick);
+        </script>
+    </template>
+
+    <script>
+        function alertClick(){
+            if(!document.body.contains(document.getElementById("alertwindow"))){
+                let elem = document.createElement('div');
+                elem.setAttribute('id', "alertwindow")
+                let alertmsg = document.getElementById("alertmsg");
+                let clon = alertmsg.content.cloneNode(true);
+                elem.appendChild(clon);
+                document.body.appendChild(elem);
+            }
+        }
+        let al = document.getElementById("alert");
+        al.addEventListener('click', alertClick);
+    </script>
+
+    <script>
+        function confirmClick(){
+            if(!document.body.contains(document.getElementById("confirmwindow"))){
+                let elem = document.createElement("div");
+                elem.setAttribute('id', 'confirmwindow');
+                let confirmmsg = document.getElementById("confirmmsg");
+                let clon = confirmmsg.content.cloneNode(true);
+                elem.appendChild(clon);
+                document.body.appendChild(elem);
+            }
+        }
+
+        let co = document.getElementById("confirm");
+        co.addEventListener('click', confirmClick);
+    </script>
+
+    <script>
+
+        function promptClick(){
+            if(!document.body.contains(document.getElementById("promptwindow"))){
+                let elem = document.createElement("div");
+                elem.setAttribute("id", 'promptwindow');
+                let promptmsg = document.getElementById("promptmsg");
+                let clon = promptmsg.content.cloneNode(true);
+                elem.appendChild(clon);
+                document.body.appendChild(elem);
+            }
+        }
+        let pr = document.getElementById("prompt");
+        pr.addEventListener('click', promptClick);
+    </script>
+
+    <p><output id="output"></output></p>
+</body>
+</html>
