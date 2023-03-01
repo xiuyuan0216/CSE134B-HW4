@@ -1,3 +1,4 @@
+
 export {alertClose, okclick, closeclick, cancelClick, submitClick, alertClick, confirmClick, promptClick}
 
 function alertClose(){

@@ -9,31 +9,6 @@
         if(localStorage.getItem("posts")!=null){
             posts = JSON.parse(localStorage.getItem("posts"));
         }
-
-        function createPost(title, date, summary){
-            let elem = document.createElement("div");
-            let post = document.getElementById("posttemplate");
-            let clon = post.content.cloneNode(true);
-            let postlist = clon.querySelectorAll("p");
-            postlist[0].textContent = "Post Title: "+title;
-            postlist[1].textContent = "Post Date: "+date;
-            postlist[2].textContent = "Post Summaray: "+summary;
-            elem.appendChild(clon);
-            document.body.appendChild(elem);
-        }
-
-        function display(posts){
-            for(let i = 0;i<posts.length;i++){
-                createPost(posts[i][0], posts[i][1], posts[i][2]);
-            }
-        }
-
-        function deleteNode(){
-            let postlist = document.querySelectorAll("div");
-            for(let i =0; i<postlist.length;i++){
-                document.body.removeChild(postlist[i]);
-            }
-        }
     </script>
 </head>
 <body>
@@ -61,7 +36,7 @@
                 console.log(JSON.parse(localStorage.getItem("posts")));
                 document.body.removeChild(e.parentNode);
             }
-
+            
             function editClick(e){
                 let plist = e.parentNode.querySelectorAll("p");
                 let oldTitle = plist[0].textContent;
@@ -80,11 +55,11 @@
                     nodelist[0].value = oldTitle;
                     nodelist[1].value = oldDate;
                     nodelist[2].value = oldSummary;
-
+            
                     nodelist[3].value = oldTitle;
                     nodelist[4].value = oldDate;
                     nodelist[5].value = oldSummary;
-
+            
                     elem.appendChild(clon);
                     document.body.appendChild(elem);
                 }
@@ -116,23 +91,8 @@
             <input type="button" id="cancel" value="cancel">
             <input type="button" id="save" value="save">
 
-            <script>
-                function cancelClick(){
-                    document.body.removeChild(document.getElementById("dialogwindow"));
-                }
-
-                function saveClick(){
-                    if(document.getElementById("titleinput").value!="" && document.getElementById("dateinput").value!="" && document.getElementById("summaryinput").value!=""){
-                        posts.push([document.getElementById("titleinput").value, document.getElementById("dateinput").value, document.getElementById("summaryinput").value]);
-                        document.body.removeChild(document.getElementById("dialogwindow"));
-                        localStorage.setItem("posts", JSON.stringify(posts));
-                        deleteNode();
-                        display(JSON.parse(localStorage.getItem("posts")));
-                    }else{
-                        alert("Please do not leave it blank!");
-                    }
-                }
-
+            <script type="module">
+                import {cancelClick, saveClick} from "./blog.js";
                 document.getElementById("cancel").addEventListener('click', cancelClick);
                 document.getElementById("save").addEventListener('click', saveClick);
             </script>
@@ -160,11 +120,8 @@
             <input type="button" id="editcancel" value="cancel">
             <input type="button" id="editsave" value="save">
 
-            <script>
-                function editCancelClick(){
-                    document.body.removeChild(document.getElementById("editdialogwindow"));
-                }
-
+            <script type="module">
+                import {editCancelClick, deleteNode, display} from "./blog.js";
                 function editSaveClick(){
                     let newTitle = document.getElementById("edittitleinput").value;
                     let newDate = document.getElementById("editdateinput").value;
@@ -181,29 +138,19 @@
                     deleteNode();
                     display(JSON.parse(localStorage.getItem("posts")));
                 }
-
                 document.getElementById("editcancel").addEventListener("click", editCancelClick);
                 document.getElementById("editsave").addEventListener("click", editSaveClick);
             </script>
         </dialog>
     </template>
 
-    <script>
-        function addClick(){
-            if(!document.body.contains(document.getElementById("dialogwindow"))){
-                let elem = document.createElement("div");
-                elem.setAttribute("id", 'dialogwindow');
-                let dialog = document.getElementById("dialog");
-                let clon = dialog.content.cloneNode(true);
-                elem.appendChild(clon);
-                document.body.appendChild(elem);
-            }
-        }
-
+    <script type="module">
+        import {addClick} from "./blog.js"
         let add = document.getElementById("add");
         add.addEventListener("click", addClick);
     </script>
-    <script>
+    <script type="module">
+        import {deleteNode, display} from "./blog.js";
         deleteNode();
         display(JSON.parse(localStorage.getItem("posts")));
     </script>
