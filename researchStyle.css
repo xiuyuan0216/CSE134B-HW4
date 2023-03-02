@@ -1,6 +1,6 @@
 :root{
-    --head-color:navy;
-    --border-color:lightgrey;
+    --head-color:#001345;
+    --border-color:#B4A117;
 }
 
 @font-face {
@@ -15,9 +15,14 @@
     text-align: justify;
 }
 
+body, main{
+    background-color: #E9DABB;
+}
+
 h1{
     font-size:2rem;
     color:var(--head-color);
+    background-color: #E9DABB;
 }
 
 .nav-bar{
