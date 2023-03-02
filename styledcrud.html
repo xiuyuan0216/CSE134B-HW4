@@ -13,14 +13,12 @@
 <body>
     <h1>Lists of Posts:</h1>
 
-    <label for="add">
-        Add your post: 
-        <input type="button" id="add" value="&#9998">
-    </label>
+
+    <input type="button" id="add" value="Add &#9998">
     <template id="posttemplate">
         <script>
             function deleteClick(e){
-                let plist = e.parentNode.parentNode.querySelectorAll("p");
+                let plist = e.parentNode.querySelectorAll("p");
                 let oldTitle = plist[0].textContent;
                 oldTitle = oldTitle.slice(oldTitle.indexOf(":")+2, oldTitle.length);
                 let oldDate = plist[1].textContent;
@@ -40,7 +38,7 @@
             }
             
             function editClick(e){
-                let plist = e.parentNode.parentNode.querySelectorAll("p");
+                let plist = e.parentNode.querySelectorAll("p");
                 let oldTitle = plist[0].textContent;
                 oldTitle = oldTitle.slice(oldTitle.indexOf(":")+2, oldTitle.length);
                 let oldDate = plist[1].textContent;
@@ -71,14 +69,8 @@
         <p id="date"></p>
         <p id="summaray"></p>
 
-        <label for="edit">
-            Edit this post:
-        <input type="button" id="edit" value="&#128269" onclick="editClick(this)">
-        </label>
-        <label for="delete">
-            Delete this post:
-        <input type="button" id="delete" value="&#128465" onclick="deleteClick(this)">  
-        </label>  
+        <input type="button" id="edit" value="Edit &#128269" onclick="editClick(this)">
+        <input type="button" id="delete" value="Delete &#128465" onclick="deleteClick(this)">  
     </template>
 
     <template id="dialog">
