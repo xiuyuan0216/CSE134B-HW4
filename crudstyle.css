@@ -1,0 +1,21 @@
+:root{
+    --head-color:navy;
+    --border-color:lightgrey;
+}
+
+*{
+    text-align: center;
+    font-size: 1rem;
+}
+
+h1{
+    font-size: 2rem;
+    color:var(--head-color);
+}
+
+#add{
+    border:1px solid var(--border-color);
+    border-radius:5px;
+    height:5vh;
+    width:15vw;
+}

@@ -9,12 +9,14 @@
             posts = JSON.parse(localStorage.getItem("posts"));
         }
     </script>
+    <link rel="stylesheet" href="crudstyle.css">
 </head>
 <body>
     <h1>Lists of Posts:</h1>
 
 
     <input type="button" id="add" value="Add &#9998">
+    <hr>
     <template id="posttemplate">
         <script>
             function deleteClick(e){
