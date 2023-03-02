@@ -1,0 +1,144 @@
+:root{
+    --head-color:navy;
+    --border-color:lightgrey;
+    --button-color-1:#0093E9;
+    --button-color-2:#80D0C7;
+}
+
+@font-face {
+    font-family: open-sans;
+    src: url(opensans.ttf);
+}
+
+*{
+    font-family: open-sans, sans-serif, 'Times New Roman', Times, serif;
+    background-color: #FFFFFF;
+    font-size: 1rem;
+}
+
+h1{
+    font-size:2rem;
+    color:var(--head-color);
+}
+
+h2{
+    font-size:1.5rem;
+    color:var(--head-color);
+}
+
+
+.nav-bar{
+    position:fixed;
+    height:6vh;
+    width:100vw;
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    top:0;
+    border-bottom:1px solid var(--border-color);
+    transition-property: height;
+    transition-duration: 1s;
+}
+
+.nav-bar:hover{
+    height:10vh;
+
+}
+
+.nav-tag{
+    text-decoration: none;
+    color:grey;
+}
+
+
+#contact-method{
+    margin-top:8vh;
+    margin-left:8vw;
+    margin-right:8vw;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 5vh;
+}
+
+#contact-form{
+    margin-left:8vw;
+    margin-right: 8vw;
+}
+
+#contact-table{
+    background-color: var(--border-color);
+    text-align: center;
+    border-radius: 6px;
+}
+
+#feedback{
+    display:flex;
+    gap: 10px;
+    justify-content: space-around;
+}
+
+#personal{
+    display:flex;
+    gap: 10px;
+    justify-content: space-around;
+}
+
+#button-list{
+    display:flex;
+    justify-content: space-around;
+}
+
+legend{
+    font-style: italic;
+}
+
+.button{
+    height:50%;
+    width:20%;
+    border-radius: 8px;
+    background-image: linear-gradient(160deg, var(--button-color-1) 50%, var(--button-color-2) 100%);
+    text-align: center;
+}
+
+caption{
+    text-align: center;
+}
+
+
+@media screen and (max-width:650px){
+    *{
+        font-size:10pt;
+        text-align:left;
+    }
+
+    h1, h2{
+        text-align: center;
+    }
+
+    #personal{
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #feedback{
+        display:flex;
+        flex-direction:column;
+        gap:20px;
+        align-items:center;
+        justify-content: space-around;
+    }
+
+    .button{
+        min-width: 80px;
+    }
+
+    
+}
+
+
+@media screen and (max-width:1000px){
+    *{
+        font-size:11pt;
+        text-align:left;
+    }
+}
