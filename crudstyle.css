@@ -19,3 +19,16 @@ h1{
     height:5vh;
     width:15vw;
 }
+
+body{
+    margin-top:8vh;
+    margin-left:8vw;
+    margin-right:8vw;
+    border-bottom: 1px solid var(--border-color);
+    border-left:1px solid var(--border-color);
+    border-top:1px solid var(--border-color);
+    padding-left:5vw;
+    border-right:1px solid var(--border-color);
+    padding-right:5vw;
+    overflow: auto;
+}
