@@ -18,7 +18,8 @@
     <input type="button" id="add" value="Add &#9998">
     <hr>
     <template id="posttemplate">
-        <script>
+        <script type="module">
+            import {thankDelete} from "./styledblog.js";
             function deleteClick(e){
                 let plist = e.parentNode.querySelectorAll("p");
                 let oldTitle = plist[0].textContent;
@@ -37,6 +38,8 @@
                 localStorage.setItem("posts", JSON.stringify(posts));
                 console.log(JSON.parse(localStorage.getItem("posts")));
                 document.body.removeChild(e.parentNode);
+                thankDelete();
+
             }
             
             function editClick(e){
