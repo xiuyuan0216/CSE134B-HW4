@@ -32,3 +32,8 @@ body{
     padding-right:5vw;
     overflow: auto;
 }
+
+#add:hover{
+    height:8vh;
+    width:20vw;
+}
