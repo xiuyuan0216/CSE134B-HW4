@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>crud</title>
+    <script>
+        let posts = [];
+        if(localStorage.getItem("posts")!=null){
+            posts = JSON.parse(localStorage.getItem("posts"));
+        }
+    </script>
+</head>
+<body>
+    <h1>Lists of Posts:</h1>
+
+    <label for="add">
+        Add your post: 
+        <input type="button" id="add" value="&#9998">
+    </label>
+    <template id="posttemplate">
+        <script>
+            function deleteClick(e){
+                let plist = e.parentNode.querySelectorAll("p");
+                let oldTitle = plist[0].textContent;
+                oldTitle = oldTitle.slice(oldTitle.indexOf(":")+2, oldTitle.length);
+                let oldDate = plist[1].textContent;
+                oldDate = oldDate.slice(oldDate.indexOf(":")+2, oldDate.length);
+                let oldSummary = plist[2].textContent;
+                oldSummary = oldSummary.slice(oldSummary.indexOf(":")+2, oldSummary.length);
+                console.log(oldTitle);
+                for(let i = 0; i<posts.length;i++){
+                    if(posts[i][0]== oldTitle&& posts[i][1]==oldDate&& posts[i][2]==oldSummary){
+                        posts.splice(i, 1);
+                        break;
+                    }
+                }
+                localStorage.setItem("posts", JSON.stringify(posts));
+                console.log(JSON.parse(localStorage.getItem("posts")));
+                document.body.removeChild(e.parentNode);
+            }
+            
+            function editClick(e){
+                let plist = e.parentNode.querySelectorAll("p");
+                let oldTitle = plist[0].textContent;
+                oldTitle = oldTitle.slice(oldTitle.indexOf(":")+2, oldTitle.length);
+                let oldDate = plist[1].textContent;
+                oldDate = oldDate.slice(oldDate.indexOf(":")+2, oldDate.length);
+                let oldSummary = plist[2].textContent;
+                oldSummary = oldSummary.slice(oldSummary.indexOf(":")+2, oldSummary.length);
+                
+                if(!document.body.contains(document.getElementById("editdialogwindow"))){
+                    let elem = document.createElement("div");
+                    elem.setAttribute("id", 'editdialogwindow');
+                    let dialog = document.getElementById("editdialog");
+                    let clon = dialog.content.cloneNode(true);
+                    let nodelist = clon.querySelectorAll("input");
+                    nodelist[0].value = oldTitle;
+                    nodelist[1].value = oldDate;
+                    nodelist[2].value = oldSummary;
+            
+                    nodelist[3].value = oldTitle;
+                    nodelist[4].value = oldDate;
+                    nodelist[5].value = oldSummary;
+            
+                    elem.appendChild(clon);
+                    document.body.appendChild(elem);
+                }
+            }
+        </script>
+        <p id="title"></p>
+        <p id="date"></p>
+        <p id="summaray"></p>
+
+        <label for="edit">
+            Edit this post:
+        <input type="button" id="edit" value="&#128269" onclick="editClick(this)">
+        </label>
+        <label for="delete">
+            Delete this post:
+        <input type="button" id="delete" value="&#128465" onclick="deleteClick(this)">  
+        </label>  
+    </template>
+
+    <template id="dialog">
+        <dialog open>
+            <p>Input your post information here!</p>
+            <label for="titleinput"> Post Title:
+                <input type="text" id="titleinput">
+            </label>
+
+            <label for="dateinput"> Post Date:
+                <input type="date" id="dateinput">
+            </label>
+
+            <label for="summaryinput"> Post Summary:
+                <input type="text" id="summaryinput">
+            </label>
+
+            <input type="button" id="cancel" value="cancel">
+            <input type="button" id="save" value="save">
+
+            <script type="module">
+                import {cancelClick, saveClick} from "./blog.js";
+                document.getElementById("cancel").addEventListener('click', cancelClick);
+                document.getElementById("save").addEventListener('click', saveClick);
+            </script>
+        </dialog>
+    </template>
+
+    <template id="editdialog">
+        <dialog open>
+            <p>Edit your post information here!</p>
+            <label for="editinput"> Post Title:
+                <input type="text" id="edittitleinput">
+            </label>
+
+            <label for="editinput"> Post Date:
+                <input type="date" id="editdateinput">
+            </label>
+
+            <label for="editinput"> Post Summary:
+                <input type="text" id="editsummaryinput">
+            </label>
+            <input type="text" id="oldtitle" hidden>
+            <input type="date" id="olddate" hidden>
+            <input type="text" id="oldsummary" hidden>
+
+            <input type="button" id="editcancel" value="cancel">
+            <input type="button" id="editsave" value="save">
+
+            <script type="module">
+                import {editCancelClick, deleteNode, display} from "./blog.js";
+                function editSaveClick(){
+                    let newTitle = document.getElementById("edittitleinput").value;
+                    let newDate = document.getElementById("editdateinput").value;
+                    let newSummary = document.getElementById("editsummaryinput").value;
+                    for(let i = 0; i<posts.length;i++){
+                        if(posts[i][0]== document.getElementById("oldtitle").value && posts[i][1]==document.getElementById("olddate").value && posts[i][2]==document.getElementById("oldsummary").value){
+                            posts[i][0] = newTitle;
+                            posts[i][1] = newDate;
+                            posts[i][2] = newSummary;
+                            break;
+                        }
+                    }
+                    localStorage.setItem("posts", JSON.stringify(posts));
+                    deleteNode();
+                    display(JSON.parse(localStorage.getItem("posts")));
+                }
+                document.getElementById("editcancel").addEventListener("click", editCancelClick);
+                document.getElementById("editsave").addEventListener("click", editSaveClick);
+            </script>
+        </dialog>
+    </template>
+
+    <script type="module">
+        import {addClick} from "./blog.js"
+        let add = document.getElementById("add");
+        add.addEventListener("click", addClick);
+    </script>
+    <script type="module">
+        import {deleteNode, display} from "./blog.js";
+        deleteNode();
+        display(JSON.parse(localStorage.getItem("posts")));
+    </script>
+</body>
+</html>
