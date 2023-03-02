@@ -52,3 +52,7 @@ div{
     text-align: center;
 }
 
+dialog{
+    position:fixed;
+}
+
