@@ -54,3 +54,6 @@ div{
     text-align: center;
 }
 
+dialog{
+    background-color: lightgray;
+}
