@@ -20,7 +20,7 @@
     <template id="posttemplate">
         <script>
             function deleteClick(e){
-                let plist = e.parentNode.querySelectorAll("p");
+                let plist = e.parentNode.parentNode.querySelectorAll("p");
                 let oldTitle = plist[0].textContent;
                 oldTitle = oldTitle.slice(oldTitle.indexOf(":")+2, oldTitle.length);
                 let oldDate = plist[1].textContent;
@@ -40,7 +40,7 @@
             }
             
             function editClick(e){
-                let plist = e.parentNode.querySelectorAll("p");
+                let plist = e.parentNode.parentNode.querySelectorAll("p");
                 let oldTitle = plist[0].textContent;
                 oldTitle = oldTitle.slice(oldTitle.indexOf(":")+2, oldTitle.length);
                 let oldDate = plist[1].textContent;
