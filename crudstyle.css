@@ -36,7 +36,6 @@ body{
     border-right:1px solid var(--border-color);
     padding-right:5vw;
     padding-bottom:5vh;
-    overflow: auto;
 }
 
 #add:hover{
@@ -50,9 +49,5 @@ div{
     background-color: lightgray;
     width:40vw;
     text-align: center;
-}
-
-dialog{
-    position:fixed;
 }
 
